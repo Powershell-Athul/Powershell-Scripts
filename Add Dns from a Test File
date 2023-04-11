@@ -1,0 +1,19 @@
+#Define Variables
+$zoneName = "abc.internal"
+$dnsServer = "dc1.abc.internal"
+$recordFilePath = "C:\test\dnstoupdate.txt"
+
+
+# Import the DNS records from the file
+
+$records = Get-Content $recordFilePath
+
+# Loop through each record and add it to the DNS zone
+foreach ($record in $records) {
+    $recordParts = $record -split "\s+"
+    $recordName = $recordParts[0]
+    $recordValue = $recordParts[1]
+
+    Add-DnsServerResourceRecordA -ZoneName $zoneName -Name $recordName -IPv4Address $recordValue `
+        -ComputerName $dnsServer -CreatePtr
+}
