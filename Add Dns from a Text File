@@ -12,8 +12,7 @@ $records = Get-Content $recordFilePath
 foreach ($record in $records) {
     $recordParts = $record -split "\s+"
     $recordName = $recordParts[0]
-    $recordValue = $recordParts[1]
+    $rec ordValue = $recordParts[1]
 
-    Add-DnsServerResourceRecordA -ZoneName $zoneName -Name $recordName -IPv4Address $recordValue `
-        -ComputerName $dnsServer -CreatePtr
+    Add-DnsServerResourceRecordA -ZoneName $zoneName -Name $recordName -IPv4Address $recordValue -ComputerName $dnsServer -CreatePtr
 }
